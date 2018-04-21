@@ -1,4 +1,6 @@
-//package file.share.main;
+/*
+ * File download function
+ */
 
 import java.io.*;
 import java.net.Socket;
@@ -47,7 +49,7 @@ public class DownloadThread implements Runnable{
                 total+=length;
                 fileOut.write(buf, 0, length);
             }
-
+            System.out.println("Done");
             in.close();
         } catch (IOException e) {
             e.printStackTrace();

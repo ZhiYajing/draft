@@ -26,21 +26,23 @@ public class FileViewer extends JDialog{
         try {
             Socket client = new Socket(ip,Integer.parseInt(port));
             client.setSoTimeout(10000);
+            
             PrintStream out = new PrintStream(client.getOutputStream());
             out.println("password:"+password);
             out.println("list:/");
+            
             InputStream inputStream = client.getInputStream();
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
             String listResult = reader.readLine();
 
             client.close();
-            //System.out.println(listResult);
+
             DefaultMutableTreeNode root = new DefaultMutableTreeNode();
             String arr[] = listResult.split("\\|");
             long size = 0;
             for(String s : arr){
                 String fileArr[] = s.split("\\?");
-                root.add(new DefaultMutableTreeNode(new MyFile(fileArr[0],fileArr[1],fileArr[2])));
+                root.add(new DefaultMutableTreeNode(new MyFile(fileArr[0],fileArr[1],fileArr[2])));//name,type size
                 size += Long.parseLong(fileArr[2]);
             }
             root.setUserObject(new MyFile("/","dir",size+""));
@@ -204,7 +206,10 @@ public class FileViewer extends JDialog{
             e.printStackTrace();
         }
     }
-
+    
+/*
+ * Directory Download Function
+ */
     private void downloadDir(String dir,String filePath) throws IOException {
         if(dir.equals("/")){
             filePath = filePath + "/shareFolder";

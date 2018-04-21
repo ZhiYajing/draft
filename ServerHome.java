@@ -16,7 +16,7 @@ import java.io.IOException;
 public class ServerHome {
     public static void main(String args[]) throws IOException {
         new ServerHome().init();
-        new Server().run();
+        new Server().serve();
     }
     public void init(){
         JFrame frame = new JFrame("File Sharing Server");

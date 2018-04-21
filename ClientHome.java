@@ -1,4 +1,6 @@
-//package file.share.main;
+/*
+ * Client interface
+ */
 
 import javax.swing.*;
 import java.awt.*;
