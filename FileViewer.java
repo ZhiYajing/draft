@@ -224,9 +224,9 @@ public class FileViewer extends JDialog{
         String listResult = reader.readLine();
         client.close();
         if(listResult != null && !listResult.equals("")) {
-            String arr[] = listResult.split("\\|");
+            String arr[] = listResult.split("\\|"); //separate files in directory
             for (String s : arr) {
-                String fileArr[] = s.split("\\?");
+                String fileArr[] = s.split("\\?"); //separate for each file 
                 if (fileArr[1].equals("dir")) {
                     downloadDir(dir + "/" + fileArr[0], filePath +"/"+ fileArr[0]);
                 } else {
