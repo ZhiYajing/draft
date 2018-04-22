@@ -1,5 +1,6 @@
-//package file.share.main;
-
+/*
+ * All information for each single file
+ */
 
 public class MyFile {
     private String name;
@@ -28,9 +29,6 @@ public class MyFile {
 
     public void setSize(String size) {
         this.size = size;
-    }
-    public String toString(){
-        return name;
     }
 
     public MyFile(String name, String type, String size) {

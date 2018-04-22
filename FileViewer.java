@@ -1,4 +1,6 @@
-
+/*
+ * Client file view GUI
+ */
 
 import javax.swing.*;
 import javax.swing.event.TreeSelectionEvent;
@@ -25,7 +27,6 @@ public class FileViewer extends JDialog{
         this.port = port;
         try {
             Socket client = new Socket(ip,Integer.parseInt(port));
-            client.setSoTimeout(10000);
             
             PrintStream out = new PrintStream(client.getOutputStream());
             out.println("password:"+password);
@@ -35,8 +36,7 @@ public class FileViewer extends JDialog{
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
             String listResult = reader.readLine();
 
-            client.close();
-
+            //list files
             DefaultMutableTreeNode root = new DefaultMutableTreeNode();
             String arr[] = listResult.split("\\|");
             long size = 0;
@@ -110,7 +110,7 @@ public class FileViewer extends JDialog{
                                     stringBuffer.insert(0, ((MyFile) temp.getUserObject()).getName() + "/");
                                     temp = (DefaultMutableTreeNode) temp.getParent();
                                 }
-
+//file or directory
                                 String filePath = stringBuffer.toString();
                                 if(myFile.getType().equals("file")){
                                     new Thread(new DownloadThread(ip,port,password,filePath,dir.getAbsolutePath(),Integer.parseInt(myFile.getSize()))).start();
@@ -130,14 +130,14 @@ public class FileViewer extends JDialog{
             });
             tree.addMouseListener(new MouseListener() {
                 @Override
-                public void mouseClicked(MouseEvent e) {
+                public void mouseClicked(MouseEvent e) {	//display file name size
                     TreePath path = tree.getPathForLocation(e.getX(), e.getY());
                     if(path!=null) {
                         DefaultMutableTreeNode node = (DefaultMutableTreeNode) path.getLastPathComponent();
                         if(e.isMetaDown()){
                             pop.show(tree, e.getX(), e.getY());
                         }else {
-                            if (e.getClickCount() == 2) {
+                            if (e.getClickCount() == 2) {   //display files in the selected folder
                                 MyFile myFile = (MyFile) node.getUserObject();
                                 if (node.isLeaf() && (myFile.getType().equals("dir"))) {
                                     DefaultTreeModel model = (DefaultTreeModel) tree.getModel();
@@ -202,23 +202,27 @@ public class FileViewer extends JDialog{
 
                 }
             });
+            client.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
     
+   
 /*
  * Directory Download Function
+ * list the file & Download
  */
     private void downloadDir(String dir,String filePath) throws IOException {
         if(dir.equals("/")){
             filePath = filePath + "/shareFolder";
         }
         Socket client = new Socket(ip,Integer.parseInt(port));
-        client.setSoTimeout(100000);
+
         PrintStream out = new PrintStream(client.getOutputStream());
         out.println("password:"+password);
         out.println("list:"+dir);
+        
         InputStream inputStream = client.getInputStream();
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
         String listResult = reader.readLine();

@@ -14,7 +14,7 @@ public class ClientHome {
         new ClientHome().init();
     }
     private void init(){
-        JFrame frame = new JFrame("MyFile Sharing Client");
+        JFrame frame = new JFrame("File Sharing Client");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setBounds(300,100,400,400);
         JPanel centerPanel = new JPanel();

@@ -1,4 +1,6 @@
-
+/*
+ * GUI foe displaying file item
+ */
 
 import javax.swing.*;
 import javax.swing.plaf.ColorUIResource;
@@ -19,7 +21,7 @@ public class MyTreeCellRenderer extends DefaultTreeCellRenderer {
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) value;
         MyFile myFile = (MyFile) node.getUserObject();
         label.setText(myFile.getName());
-        label.setIcon(new ImageIcon(myFile.getType()+".png"));
+        label.setIcon(new ImageIcon());
         label.setOpaque(false);
         return label;
     }

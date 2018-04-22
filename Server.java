@@ -1,4 +1,6 @@
-
+/*
+ * Multithread foe supporting multiple users
+ */
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -11,6 +13,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class Server {
+	//multithread 
 	class ServerThread implements Runnable {		  
 	    private Socket client = null;
 	    public ServerThread(Socket client){  
@@ -34,7 +37,6 @@ public class Server {
 	                    BufferedReader passwordReader = new BufferedReader(new FileReader(new File("password.txt")));
 	                    String correctPassword = passwordReader.readLine();
 	                    if((password).equals(correctPassword)){
-	                    //if(Md5Util.md5(password).equals(correctPassword)){
 	                        passwordValid = true;
 	                    }
 	                }
@@ -98,6 +100,7 @@ public class Server {
 	        }
 	    }
 
+// Get the direction size (sum of all its files' size)
 	    private long getDirSize(File file) {
 	        if(file.isFile()){
 	            return file.length();
@@ -116,7 +119,7 @@ public class Server {
 	    }
 	}
 	
-	
+//Establish connection with client
     public void serve() throws IOException {
         ServerSocket server = new ServerSocket(9000);
         try {

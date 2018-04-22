@@ -16,6 +16,7 @@ public class ServerHome {
         new ServerHome().init();
         new Server().serve();
     }
+    //Set share directory and password
     public void init(){
         JFrame frame = new JFrame("File Sharing Server");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -91,7 +92,6 @@ public class ServerHome {
                             File pathFile = new File("password.txt");
                             try {
                                 BufferedWriter writer = new BufferedWriter(new FileWriter(pathFile));
-                                //writer.append(Md5Util.md5(passwordOne));
                                 writer.append(passwordOne);
                                 writer.flush();
                                 writer.close();
