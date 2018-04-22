@@ -1,8 +1,6 @@
-//package file.share.main;
-
-
-//import file.share.socket.Server;
-//import file.share.utils.Md5Util;
+/*
+ * GUI interface for server
+ */
 
 import javax.swing.*;
 import java.awt.*;
@@ -93,7 +91,8 @@ public class ServerHome {
                             File pathFile = new File("password.txt");
                             try {
                                 BufferedWriter writer = new BufferedWriter(new FileWriter(pathFile));
-                                writer.append(Md5Util.md5(passwordOne));
+                                //writer.append(Md5Util.md5(passwordOne));
+                                writer.append(passwordOne);
                                 writer.flush();
                                 writer.close();
                                 JOptionPane.showMessageDialog(null,"Set Password Successfully!");

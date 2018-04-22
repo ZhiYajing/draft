@@ -33,7 +33,8 @@ public class Server {
 	                    String password = line.replaceFirst("password:","");
 	                    BufferedReader passwordReader = new BufferedReader(new FileReader(new File("password.txt")));
 	                    String correctPassword = passwordReader.readLine();
-	                    if(Md5Util.md5(password).equals(correctPassword)){
+	                    if((password).equals(correctPassword)){
+	                    //if(Md5Util.md5(password).equals(correctPassword)){
 	                        passwordValid = true;
 	                    }
 	                }
